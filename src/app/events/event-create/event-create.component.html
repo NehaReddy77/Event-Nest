@@ -1,0 +1,41 @@
+<mat-card>
+  <form [formGroup]="myForm" (ngSubmit)="onAddEvent()">
+    <div style="display: flex; flex-direction: column;">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="title"
+        ngModel
+        required
+        minlength="3"
+        placeholder="Event Title"
+        #title>
+      <mat-error *ngIf="title.invalid">Please enter a event title.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="4"
+        formControlName="content"
+        ngModel
+        required
+        placeholder="Event Content"
+        #content></textarea>
+      <mat-error *ngIf="content.invalid">Please enter a event title.</mat-error>
+    </mat-form-field>
+    <mat-form-field style="width: 30%;">
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button style="width: 20%;"
+      mat-raised-button
+      color="accent"
+      type="submit">Save Event</button>
+      </div>
+  </form>
+  <input #placesRef="ngx-places" ngx-gp-autocomplete (onAddressChange)="handleAddressChange($event)"/>
+  <p>{{event_label}}</p>
+</mat-card>
